@@ -109,14 +109,17 @@ if __name__ == "__main__":
             TEKTON_DEF_LVL -= (TEKTON_DEF_LVL * .30)  # calculate total def reduction
             # print("Tekton's new def lvl after hit: ", TEKTON_DEF_LVL)
 
+    TEKTON_HP -= sum(hammer_hits)
+
     print("Hammer hits: ", hammer_hits)
     print("Tekton's final def lvl: ", TEKTON_DEF_LVL)
-    print("Tekton's remaining hp:, ", (900 - sum(hammer_hits)))
+    print("Tekton's remaining hp: ", TEKTON_HP)
+
 
     swings = 0
-    while TEKTON_HP > 0:
+    while TEKTON_HP >= 0:
         # three total scythe swings every 3 seconds
-        for i in range(2):
+        for i in range(3):
             swing_damage = roll_scythe_hit(TEKTON_DEF_LVL)
             TEKTON_HP -= swing_damage
             swings += 1
