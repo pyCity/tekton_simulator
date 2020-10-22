@@ -119,8 +119,7 @@ def main():
         # print("Tekton's final def lvl: ", TEKTON_DEF_LVL)
         # print("Tekton's remaining hp: ", TEKTON_HP)
 
-
-        swings = 0
+        swings = 10.8  # Start swings at 10.8 to account for two hammer specs for each player
         while TEKTON_HP >= 0:
             # three total scythe swings every 3 seconds
             for i in range(3):
@@ -132,7 +131,7 @@ def main():
         #swings += num_kills
 
     num_kills -= 1
-    print("Over {0} kills, inquisitor averaged {1} seconds per kill in a trio".format(num_kills, swings))
+    print("Over {0} kills, inquisitor averaged {1} seconds per kill in a trio".format(num_kills, (swings/3)))
     # desired output "over x number of tektons,
     # inquisitor averaged y seconds per kill and bandos averaged z seconds per kill"
 
