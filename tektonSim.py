@@ -94,14 +94,19 @@ def roll_scythe_hit(TEKTON_DEF_LVL):
 
 
 def main():
+    hammer_hits = []
     num_kills = int(input("Enter the total number of kills to simulate: "))
+    # global swings
+
     for i in range(num_kills):
+        swings = 10.8
+
         TEKTON_DEF_LVL = 250
         TEKTON_HP = 900
         # print("Tekton's initial def lvl: ", TEKTON_DEF_LVL)
 
         # populate array of hammer hits
-        hammer_hits = []
+        # hammer_hits = []
         for _ in range(6):
             x = roll_hammer_spec(TEKTON_DEF_LVL)
             hammer_hits.append(x)
@@ -111,6 +116,7 @@ def main():
             if hammer_hits[i] > 0:
                 TEKTON_DEF_LVL -= (TEKTON_DEF_LVL * .30)  # calculate total def reduction
                 # print("Tekton's new def lvl after hit: ", TEKTON_DEF_LVL)
+        # print(hammer_hits)
 
         TEKTON_HP -= sum(hammer_hits)
 
@@ -118,17 +124,16 @@ def main():
         # print("Tekton's final def lvl: ", TEKTON_DEF_LVL)
         # print("Tekton's remaining hp: ", TEKTON_HP)
 
-        swings = 10.8  # Start swings at 10.8 seconds to account for two hammer specs for each player
         while TEKTON_HP >= 0:
             for _ in range(3):  # three total scythe swings every 3 seconds
                 swing_damage = roll_scythe_hit(TEKTON_DEF_LVL)
                 TEKTON_HP -= swing_damage
-                swings += 1
-        # print("Tekton killed in {0} seconds ".format(swings))
+            swings += 1
+
+        print("Tekton killed in {0} seconds ".format(swings))
 
     print("Over {0} kills, inquisitor averaged {1} seconds per kill in a trio".format(num_kills, swings))
-    # desired output "over x number of tektons,
-    # inquisitor averaged y seconds per kill and bandos averaged z seconds per kill"
+    print("Hammers hit on average {0} times per kill".format(len([i for i in hammer_hits if i > 0]) / num_kills))
 
 
 if __name__ == "__main__":
